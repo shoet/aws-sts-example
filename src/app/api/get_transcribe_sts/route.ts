@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { STSClient, AssumeRoleCommand } from "@aws-sdk/client-sts";
 
 export const GET = async (request: NextRequest) => {
-  const token = request.cookies.get("authToken")?.value;
+  const token = request.headers.get("authorization");
   if (!token) {
     return NextResponse.json({ message: "BadRequest" }, { status: 400 });
   }
