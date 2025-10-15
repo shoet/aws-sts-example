@@ -12,7 +12,7 @@ export class AppStack extends cdk.Stack {
         transcribe: new cdk.aws_iam.PolicyDocument({
           statements: [
             new cdk.aws_iam.PolicyStatement({
-              actions: ["transcribe:StartStreamTranscription"],
+              actions: ["transcribe:StartStreamTranscriptionWebSocket"],
               resources: ["*"],
             }),
           ],
