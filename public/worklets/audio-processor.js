@@ -62,7 +62,7 @@ class AudioProcessor extends AudioWorkletProcessor {
     const inputMonoralSamples = inputs[0][0];
 
     if (this.listening) {
-      const view = new DataView(this.buffer);
+      let view = new DataView(this.buffer);
       for (let i = 0; i < inputMonoralSamples.length; i++) {
         if (this.currentByteOffset >= this.bufferSize) {
           this.port.postMessage({
@@ -71,6 +71,7 @@ class AudioProcessor extends AudioWorkletProcessor {
           });
           this.buffer = new ArrayBuffer(this.bufferSize);
           this.currentByteOffset = 0;
+          view = new DataView(this.buffer);
         }
         const sample = inputMonoralSamples[i];
         view.setInt16(
